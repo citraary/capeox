@@ -1,23 +1,28 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import os
 
 # Streamlit app title
 st.title('Random Forest Model Deployment')
 
-# Load the saved model using pickle
-try:
-    with open('random_forest_model.pkl', 'rb') as file:
-        model = pickle.load(file)
-    st.success('Model loaded successfully!')
-except Exception as e:
-    st.error(f'Error loading model: {e}')
-    model = None  # Ensure model is defined even if loading fails
+# Check if the model file exists
+if not os.path.exists('random_forest_model.pkl'):
+    st.error('Model file not found. Please ensure `random_forest_model.pkl` is in the correct directory.')
+else:
+    # Load the saved model using pickle
+    try:
+        with open('random_forest_model.pkl', 'rb') as file:
+            model = pickle.load(file)
+        st.success('Model loaded successfully!')
+    except Exception as e:
+        st.error(f'Error loading model: {e}')
+        model = None  # Ensure model is defined even if loading fails
 
 # Input fields for features
 st.write("### Enter Input Features")
 cea = st.number_input('CEA Value', value=0.01)  # Default value from your dataset
-mthfr = st.number_input('MTHFR Value', value=0.02)  # Default value from your dataset
+mthfr = st.number_input('MTHFR Value', value=0.03)  # Default value from your dataset
 
 # Predict button
 if st.button('Predict Tumor Value'):
