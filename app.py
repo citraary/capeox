@@ -14,9 +14,9 @@ except Exception as e:
     st.error(f'Error loading model: {e}')
 
 # Input fields for features
-st.write("### Enter Input Features")
-cea = st.number_input('CEA Value', value=8.21)  # Default value from your dataset
-mthfr = st.number_input('MTHFR Value', value=6.063)  # Default value from your dataset
+st.write("### Enter Values")
+cea = st.number_input('CEA Value', value=0)  # Default value from your dataset
+mthfr = st.number_input('MTHFR Value', value=0)  # Default value from your dataset
 
 # Predict button
 if st.button('Predict Tumor Value'):
